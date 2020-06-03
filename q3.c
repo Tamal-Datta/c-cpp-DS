@@ -1,3 +1,5 @@
+/////////////////////////Toggling each pairs of bits in a given number (100110010101110001 -> 011001101010001110)//////////////
+
 #include<stdio.h>
 int rev(int n);
 void main()
