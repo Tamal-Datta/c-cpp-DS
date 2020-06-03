@@ -1,3 +1,6 @@
+////////q1: find the immediate smallest of a digit (65438 -> 65384 , 321->312)//////////////
+
+
 #include<stdio.h>
 int lowest(int n);
 void main()
