@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<string.h>
+
+void main()
+{
+    char p[10];
+    puts("enter the prefix expression");
+    scanf("%s",p);
+    printf("prefix=%s\n",p);
+    int l=strlen(p)-1,i=0,k=0;
+    char s[l][10];
+    for(int i=0;i<l;i++)
+        memset(s[i],'\0',10);
+    
+    for(int i=l;i>=0;i--)
+       {
+        if(p[i]>='A' && p[i]<='Z')
+            {
+            s[k][0]=p[i]; 
+            s[k][1]='\0';
+            //strcpy(s[i],&p[l]);
+            k++;
+            }
+            
+        else if(p[i]=='+' || p[i]=='/' || p[i]=='*' || p[i]=='-' || p[i]=='%')
+            {
+                char t[10];
+                strcpy(t,s[k-1]);
+                switch(p[i])
+                {
+                    case '+':strcat(t,"+");break;
+                    case '-':strcat(t,"-");break;
+                    case '*':strcat(t,"*");break;
+                    case '/':strcat(t,"/");break;
+                    case '%':strcat(t,"%");break;
+                }
+                strcat(t,s[k-2]);
+                
+                k=k-2;
+                memset(s[k],'\0',10);
+                memset(s[k+1],'\0',10);
+                if(strlen(t)>1)
+                    {
+                        strcpy(s[k],"(");
+                        strcat(s[k],t);
+                        strcat(s[k],")");
+                    }
+                else    
+                    strcpy(s[k],t);
+                
+                k++;
+            }
+    }
+    printf("infix=%s\n",s[0]);
+    
+    
+}
