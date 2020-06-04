@@ -1,0 +1,20 @@
+#include<stdio.h>
+void main()
+{
+    int n,c=0,c1=0,p1=0,p2=0;
+    printf("enter a number\n");
+    scanf("%d",&n);
+    for(int i=31;i>=0;i--)
+        {
+            if((n>>i)&1==1)
+                c++;
+            else if(c>=c1)
+                {
+                c1=c;
+                c=0;
+                p1=i+1;
+                p2=i+c1;
+                }
+        }
+    printf("start=%d,end=%d,number of 1 in that sequence=%d\n",p1,p2,c1);    
+}
