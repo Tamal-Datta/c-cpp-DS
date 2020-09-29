@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct abc{
+    int a;
+    struct abc* n;
+}abc;
+static abc* tmp=0;
+
+void begin(abc **hp)
+{
+    abc *t=(abc*)malloc(sizeof(abc));
+    scanf("%d",&t->a);
+    
+    t->n=*hp;
+    if(*hp==0)
+        tmp=t;
+    *hp=t;
+    tmp->n=*hp;
+}
+
+void end(abc **hp)
+{
+   abc *t=(abc*)malloc(sizeof(abc));
+    scanf("%d",&t->a);
+    t->n=0;
+    
+    if(*hp==0)
+    {
+        t->n=*hp;
+        *hp=t;
+    }    
+    else{
+        t->n=tmp->n;
+        tmp->n=t;
+    }
+    tmp=t;
+    tmp->n=*hp;
+}
+
+void print(abc *p)
+{
+    if(p==0)
+        puts("empty linked_list");
+    else{
+    abc *k=p;
+    do{
+        printf("%d\n",p->a);
+        p=p->n;
+    }while(p!=k);
+    }
+}
+
+void main(){
+    
+    abc *hp=0;
+    int op;
+    do{
+        puts("1:add_begin\t2:add_end\t3:print\t4:exit");
+        scanf("%d",&op);
+        switch(op){
+            case 1:begin(&hp);break;
+            case 2:end(&hp);break;
+            case 3:print(hp);break;
+            case 4: puts("bye");
+            default: break;
+            }
+        }while(op!=4);
+}
